@@ -195,7 +195,7 @@ var propertyList = `<?xml version="1.0" encoding="UTF-8"?>
 	<string>{{.Name}}</string>
 	<key>ProgramArguments</key>
 	<array>
-	    <string>{{.Path}}</string>
+	    <string>{{.Path}} {{.InstallArgs}}</string>
 	</array>
 	<key>RunAtLoad</key>
 	<true/>
