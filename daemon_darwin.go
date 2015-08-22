@@ -18,11 +18,12 @@ import (
 type darwinRecord struct {
 	name        string
 	description string
+	installArgs string
 }
 
-func newDaemon(name, description string) (Daemon, error) {
+func newDaemon(name, description, installArgs string) (Daemon, error) {
 
-	return &darwinRecord{name, description}, nil
+	return &darwinRecord{name, description, installArgs}, nil
 }
 
 // Standard service path for system daemons
@@ -95,8 +96,8 @@ func (darwin *darwinRecord) Install() (string, error) {
 	if err := templ.Execute(
 		file,
 		&struct {
-			Name, Path string
-		}{darwin.name, execPatch},
+			Name, Path, InstallArgs string
+		}{darwin.name, execPatch, darwin.installArgs},
 	); err != nil {
 		return installAction + failed, err
 	}
